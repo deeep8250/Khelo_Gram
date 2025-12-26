@@ -19,25 +19,26 @@ type SignUp struct {
 }
 
 type User struct {
-	Id           uint           `json:"id" gorm:"primaryKey"`
-	Name         string         `json:"name" gorm:"not null"`
-	Email        string         `json:"email" gorm:"unique;not null"`
-	Phone        int            `json:"phone" gorm:"unique; not null"`
-	Location     Location       `gorm:"foreignKey:OwnerId"`
-	Password     string         `json:"-" gorm:"not null"`
-	CreatedAt    time.Time      `json:"created_at" gorm:"not null"`
+	Id           uint           `json:"id" gorm:"primaryKey" binding:"required"`
+	Name         string         `json:"name" gorm:"not null" binding:"required"`
+	Email        string         `json:"email" gorm:"unique;not null" binding:"required"`
+	Phone        int            `json:"phone" gorm:"unique; not null" binding:"required"`
+	Location     Location       `gorm:"foreignKey:OwnerId" `
+	Password     string         `json:"-" gorm:"not null" binding:"not null , min=6"`
+	CreatedAt    time.Time      `gorm:"autoCreateTime"`
 	RefreshToken []RefreshToken `json:"-" gorm:"foreignKey:UserId"`
 }
 
 type Location struct {
 	Id        uint      `json:"id" gorm:"primaryKey"`
 	OwnerId   uint      `json:"user_id"`
-	Pin       int64     `json:"pin" gorm:"not null" binding:"min=6 , max=6"`
+	Pin       string    `json:"pin" gorm:"not null" binding:"min=6 , max=6"`
 	State     string    `json:"state" gorm:"not null"`
+	City      string    `json:"city" gorm:"not null"`
 	Village   string    `json:"village" gorm:"not null"`
 	OwnerType string    `json:"owner_type" gorm:"not null"`
-	UpdatedAt time.Time `json:"updated_at" gorm:"not null"`
-	CreatedAt time.Time `json:"created_at" gorm:"not null"`
+	UpdatedAt time.Time `json:"updated_at" gorm:"autoUpdateTime"`
+	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
 }
 
 type Club struct {
