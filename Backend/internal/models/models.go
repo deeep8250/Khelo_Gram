@@ -19,62 +19,63 @@ type SignUp struct {
 }
 
 type User struct {
-	Id           uint           `json:"id" gorm:"primaryKey" binding:"required"`
-	Name         string         `json:"name" gorm:"not null" binding:"required"`
-	Email        string         `json:"email" gorm:"unique;not null" binding:"required"`
-	Phone        int            `json:"phone" gorm:"unique; not null" binding:"required"`
-	Location     Location       `gorm:"foreignKey:OwnerId" `
-	Password     string         `json:"-" gorm:"not null" binding:"not null , min=6"`
-	CreatedAt    time.Time      `gorm:"autoCreateTime"`
+	Id           uint       `json:"id" gorm:"primaryKey"`
+	Name         string     `json:"name" gorm:"not null" binding:"required"`
+	Email        string     `json:"email" gorm:"unique;not null" binding:"required"`
+	Phone        string     `json:"phone" gorm:"unique; not null" binding:"required"`
+	Location     []Location `json:"location" gorm:"polymorphic:Owner; polymorphicValue:user" `
+	Password     string     `json:"-" gorm:"not null" binding:"required,min=6"`
+	CreatedAt    time.Time
 	RefreshToken []RefreshToken `json:"-" gorm:"foreignKey:UserId"`
 }
 
 type Location struct {
 	Id        uint      `json:"id" gorm:"primaryKey"`
-	OwnerId   uint      `json:"user_id"`
-	Pin       string    `json:"pin" gorm:"not null" binding:"min=6 , max=6"`
+	OwnerID   uint      `json:"owner_id" gorm:"index"`
+	Pin       string    `json:"pin" gorm:"not null" binding:"len=6"`
 	State     string    `json:"state" gorm:"not null"`
 	City      string    `json:"city" gorm:"not null"`
 	Village   string    `json:"village" gorm:"not null"`
-	OwnerType string    `json:"owner_type" gorm:"not null"`
-	UpdatedAt time.Time `json:"updated_at" gorm:"autoUpdateTime"`
-	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
+	OwnerType string    `json:"owner_type" gorm:"not null index" `
+	UpdatedAt time.Time ` gorm:"autoUpdateTime"`
+	CreatedAt time.Time ` gorm:"autoCreateTime"`
 }
 
 type Club struct {
-	Id          uint      `json:"id" gorm:"primaryKey"`
-	UserId      uint      `json:"user_id" gorm:"not null"`
-	ClubName    string    `json:"club_name" gorm:"not null"`
-	AadharNb    int64     `json:"aadhar_nb" gorm:"not null" binding:"min=12 max=12"`
-	PublishedAt time.Time `json:"published_at" gorm:"not null"`
-	IsVerified  bool      `json:"is_verified" gorm:"not null"`
-	Location    Location  `json:"location" gorm:"foreignKey:OwnerId"`
-	About       string    `json:"about" gorm:"not null"`
-	ProfileImg  string    `json:"profile_img" gorm:"not null"`
+	Id          uint       `json:"id" gorm:"primaryKey"`
+	UserId      uint       `json:"user_id" gorm:"not null"`
+	ClubName    string     `json:"club_name" gorm:"not null"`
+	AadharNb    string     `json:"aadhar_nb" gorm:"not null" binding:"len=12"`
+	PublishedAt time.Time  `json:"published_at" gorm:"not null"`
+	IsVerified  bool       `json:"is_verified" gorm:"not null"`
+	Location    []Location `json:"location" gorm:"polymorphic:Owner; polymorphicValue:club"`
+	About       string     `json:"about" gorm:"not null"`
+	ProfileImg  string     `json:"profile_img" gorm:"not null"`
+	Mobile      string     `json:"mobile" gorm:"not null"`
 }
 
 type Tournaments struct {
-	Id             uint      `json:"id" gorm:"primaryKey"`
-	OrganizerId    uint      `json:"org_id" gorm:"not null"`
-	CoverImage     string    `json:"cover_img" gorm:"not null"`
-	TournamentName string    `json:"tournament_name" gorm:"not null"`
-	Location       Location  `json:"location" gorm:"not null"`
-	StartedAt      time.Time `json:"started_at" gorm:"not null"`
-	EndedAt        time.Time `json:"ended_at" gorm:"not null"`
-	EntryFees      int64     `json:"entry_fees" gorm:"not null"`
-	TotalTeams     uint      `json:"total_teams" gorm:"not null"`
-	MembersPerTeam uint      `json:"members_per_team" gorm:"not null"`
-	AgeAllow       uint      `json:"age_allowed" gorm:"not null"`
-	FirstPrize     int64     `json:"first_prize" gorm:"not null"`
-	SecondPrize    int64     `json:"second_prize" gorm:"not null"`
-	ThirdPrize     int64     `json:"third_prize" gorm:"not null"`
-	OtherPrize     int64     `json:"other_prize" gorm:"not null"`
-	Rules          string    `json:"rules" gorm:"not null"`
-	CreateAt       time.Time `json:"created_at" gorm:"not null"`
-	UpdatedAt      time.Time `json:"updated_at" gorm:"not null"`
-	DeletedAt      time.Time `json:"deleted_at" gorm:"not null"`
-	IsDeleted      bool      `json:"is_deleted" gorm:"not null"`
-	IsEnded        bool      `json:"is_ended" gorm:"not null"`
+	Id             uint       `json:"id" gorm:"primaryKey"`
+	OrganizerId    uint       `json:"org_id" gorm:"not null"`
+	CoverImage     string     `json:"cover_img" gorm:"not null"`
+	TournamentName string     `json:"tournament_name" gorm:"not null"`
+	Location       []Location `json:"location" gorm:"polymorphic:Owner; polymorphicValue:tournament"`
+	StartedAt      time.Time  `json:"started_at" gorm:"not null"`
+	EndedAt        time.Time  `json:"ended_at" gorm:"not null"`
+	EntryFees      int64      `json:"entry_fees" gorm:"not null"`
+	TotalTeams     uint       `json:"total_teams" gorm:"not null"`
+	MembersPerTeam uint       `json:"members_per_team" gorm:"not null"`
+	AgeAllow       uint       `json:"age_allowed" gorm:"not null"`
+	FirstPrize     int64      `json:"first_prize" gorm:"not null"`
+	SecondPrize    int64      `json:"second_prize" gorm:"not null"`
+	ThirdPrize     int64      `json:"third_prize" gorm:"not null"`
+	OtherPrize     int64      `json:"other_prize" gorm:"not null"`
+	Rules          string     `json:"rules" gorm:"not null"`
+	CreateAt       time.Time  ` gorm:"not null"`
+	UpdatedAt      time.Time  ` gorm:"not null"`
+	DeletedAt      time.Time  ` gorm:"not null"`
+	IsDeleted      bool       ` gorm:"not null"`
+	IsEnded        bool       ` gorm:"not null"`
 }
 
 type RefreshToken struct {
