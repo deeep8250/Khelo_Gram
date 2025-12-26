@@ -1,2 +1,3 @@
-alter table 
+alter table clubs
+DROP COLUMN mob,
 
