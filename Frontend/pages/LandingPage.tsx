@@ -36,8 +36,8 @@ const LandingPage: React.FC = () => {
          {/* Hero Section */}
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-               <h1 className="text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
-                  Run Your <br />Tournaments <span className="text-primary">Like a Pro.</span>
+               <h1 className="text-5xl   leading-tight sm:leading-snug lg:leading-[1.25] lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                   Play More <br />Manage Easy <span className="text-primary">Win Together.</span>
                </h1>
                <p className="mt-6 text-lg text-slate-600 dark:text-slate-400 max-w-lg">
                   The all-in-one platform for bracket generation, team registration, and live score tracking. Simplify your workflow today.
@@ -60,9 +60,9 @@ const LandingPage: React.FC = () => {
 
                <div className="mt-8 flex items-center space-x-4">
                   <div className="flex -space-x-2">
-                     <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" src="https://picsum.photos/100/100?random=1" alt="User" />
-                     <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" src="https://picsum.photos/100/100?random=2" alt="User" />
-                     <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" src="https://picsum.photos/100/100?random=3" alt="User" />
+                     <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" src="cricket.png" alt="User" />
+                     <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" src="basket.png" alt="User" />
+                     <img className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-900" src="football.png" alt="User" />
                   </div>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Trusted by 2,000+ organizers</p>
                </div>
