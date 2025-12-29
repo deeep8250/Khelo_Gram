@@ -2,11 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Trophy,
-  Users,
+  CalendarCheck,
   Calendar,
-  GitGraph,
-  Zap,
-  CreditCard,
+  Handshake,
+  Users,
 } from "lucide-react";
 import Footer from "../components/Footer";
 import ChatBotButton from "../components/ChatBotButton";
@@ -194,45 +193,44 @@ const LandingPage: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <div className="p-8 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-200 dark:hover:border-primary/50 transition-colors">
-            <div className="h-12 w-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary mb-6">
-              <GitGraph className="h-6 w-6" />
+          <div className="p-8 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-green-300 dark:hover:border-green-500/50 transition-colors">
+            <div className="h-12 w-12 bg-green-100 dark:bg-green-900/20 rounded-xl flex items-center justify-center text-green-600 mb-6">
+              <Users className="h-6 w-6" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-              Empowering Village Talent
+              Show Your Talent
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Give local players a stage to showcase their skills beyond
-              boundaries. From small villages to bigger platforms, real talent
-              finally gets noticed.
+              Give players from villages a chance to show their skills. Play
+              well, get noticed, and move forward.
             </p>
           </div>
 
           {/* Card 2 */}
-          <div className="p-8 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-200 dark:hover:border-primary/50 transition-colors">
-            <div className="h-12 w-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary mb-6">
-              <Zap className="h-6 w-6" />
+          <div className="p-8 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-300 dark:hover:border-blue-500/50 transition-colors">
+            <div className="h-12 w-12 bg-blue-100 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+              <CalendarCheck className="h-6 w-6" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-              Organize Local Tournaments Easily
+              Create Local Matches
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Anyone can create a tournament for their village or town. Bring
-              teams together and turn local matches into memorable events.
+              Easily create matches for your village or nearby areas. Bring
+              teams together and enjoy the game.
             </p>
           </div>
 
           {/* Card 3 */}
-          <div className="p-8 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-200 dark:hover:border-primary/50 transition-colors">
-            <div className="h-12 w-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary mb-6">
-              <CreditCard className="h-6 w-6" />
+          <div className="p-8 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-orange-300 dark:hover:border-orange-500/50 transition-colors">
+            <div className="h-12 w-12 bg-orange-100 dark:bg-orange-900/20 rounded-xl flex items-center justify-center text-orange-600 mb-6">
+              <Handshake className="h-6 w-6" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-              Fair Play & Equal Opportunity
+              Fair Play for Everyone
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              No favoritism, no shortcuts — just pure sportsmanship. Every
-              player gets a fair chance to prove their talent on the ground.
+              Every team and player is treated equally. No cheating, only honest
+              and fair play.
             </p>
           </div>
         </div>
