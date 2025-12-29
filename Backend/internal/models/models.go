@@ -15,18 +15,25 @@ type Login struct {
 type SignUp struct {
 	Name     string `json:"name" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
+	Age      string `json:"age" gorm:"not null" binding:"required"`
 	Password string `json:"password"  binding:"required,min=6"`
+	Phone    string `json:"phone" gorm:"unique; not null" binding:"required"`
+	Pin      string `json:"pin" gorm:"not null" binding:"len=6"`
+	State    string `json:"state" gorm:"not null"`
+	City     string `json:"city" gorm:"not null"`
+	Village  string `json:"village" gorm:"not null"`
 }
 
 type User struct {
-	Id           uint       `json:"id" gorm:"primaryKey"`
-	Name         string     `json:"name" gorm:"not null" binding:"required"`
-	Email        string     `json:"email" gorm:"unique;not null" binding:"required"`
-	Phone        string     `json:"phone" gorm:"unique; not null" binding:"required"`
-	Location     []Location `json:"location" gorm:"polymorphic:Owner; polymorphicValue:user" `
-	Password     string     `json:"-" gorm:"not null" binding:"required,min=6"`
-	CreatedAt    time.Time
-	RefreshToken []RefreshToken `json:"-" gorm:"foreignKey:UserId"`
+	Id            uint       `json:"id" gorm:"primaryKey"`
+	Name          string     `json:"name" gorm:"not null" binding:"required"`
+	Email         string     `json:"email" gorm:"unique;not null" binding:"required"`
+	Age           string     `json:"age" gorm:"not null" binding:"required"`
+	Phone         string     `json:"phone" gorm:"unique; not null" binding:"required"`
+	Location      []Location `json:"location" gorm:"polymorphic:Owner; polymorphicValue:user" `
+	Password_hash string     `json:"-" gorm:"not null" binding:"required,min=6"`
+	CreatedAt     time.Time
+	RefreshToken  []RefreshToken `json:"-" gorm:"foreignKey:UserId"`
 }
 
 type Location struct {
