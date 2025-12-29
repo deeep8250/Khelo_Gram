@@ -5,6 +5,7 @@ import (
 	"Notes/internal/models"
 	"Notes/internal/utils"
 	"errors"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -26,15 +27,19 @@ func SignUp(c *gin.Context) {
 	}
 
 	//checking that user already exist or not
+	var dbUser models.User
 	db := db.DB
-	err = db.Where("email=?", user.Email).First(&user).Error
+	err = db.Where("email=?", user.Email).First(&dbUser).Error
 
 	if err == nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "user already exist",
+		fmt.Println("enter")
+
+		c.JSON(http.StatusConflict, gin.H{
+			"error": "user already exists",
 		})
 		return
 	}
+
 	// error.is take two things one is the var that hold error anothe thing is the expected error
 	//  so we flip that by ! mean if any error but not errrecordnotfound appear then execute
 
@@ -56,24 +61,33 @@ func SignUp(c *gin.Context) {
 	}
 
 	user.Password = string(hashPass)
-
-	db.Create(user)
+	dbUser = models.User{
+		Name:          user.Name,
+		Email:         user.Email,
+		Phone:         user.Phone,
+		Password_hash: user.Password,
+		Age:           user.Age,
+	}
+	db.Create(&dbUser)
+	c.JSON(http.StatusOK, gin.H{
+		"success": "user created",
+	})
 
 }
 
 func Login(c *gin.Context) {
-
+	fmt.Println("entered in login")
 	var input models.Login
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "invalid request",
+			"error": err.Error(),
 		})
 		return
 	}
 
 	var User models.User
-	Validation := db.DB.Where("email=?", User.Email).Find(&User)
+	Validation := db.DB.Where("email=?", input.Email).Find(&User)
 	if Validation.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": Validation.Error,
@@ -83,12 +97,12 @@ func Login(c *gin.Context) {
 
 	if Validation.RowsAffected == 0 {
 		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": "invalid user",
+			"error": err.Error(),
 		})
 		return
 	}
 
-	err = bcrypt.CompareHashAndPassword([]byte(User.Password), []byte(input.Password))
+	err = bcrypt.CompareHashAndPassword([]byte(User.Password_hash), []byte(input.Password))
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"error": "invalid password",
@@ -198,6 +212,34 @@ func GetRefreshToken(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"access-token": NewjwtKey,
 		"refrsh-token": NewRefreshToken,
+	})
+
+}
+
+func ProtectedRoute(c *gin.Context) {
+
+	email, ok := c.Get("email")
+	if !ok {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error": "user not verified",
+		})
+		return
+	}
+
+	var User models.User
+	resullt := db.DB.Where("email=?", email).First(&User)
+	if resullt.Error == gorm.ErrRecordNotFound {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "unauthorized user"})
+		return
+	} else if resullt.Error != nil {
+
+		c.JSON(http.StatusUnauthorized, gin.H{"error": resullt.Error})
+		return
+
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"response": User,
 	})
 
 }
