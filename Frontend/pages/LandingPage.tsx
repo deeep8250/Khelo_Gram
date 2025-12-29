@@ -155,8 +155,9 @@ const LandingPage: React.FC = () => {
                   <div className="h-12 w-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary mb-6">
                      <GitGraph className="h-6 w-6" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Automated Brackets</h3>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">Say goodbye to spreadsheets. Generate balanced single/double elimination brackets in seconds.</p>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Empowering Village Talent</h3>
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">Give local players a stage to showcase their skills beyond boundaries.
+From small villages to bigger platforms, real talent finally gets noticed.</p>
                </div>
                <div className="p-8 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-blue-200 dark:hover:border-primary/50 transition-colors">
                   <div className="h-12 w-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary mb-6">
