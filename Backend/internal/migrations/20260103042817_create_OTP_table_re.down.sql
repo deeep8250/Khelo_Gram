@@ -1,0 +1,1 @@
+drop table if exist otp_verification ;

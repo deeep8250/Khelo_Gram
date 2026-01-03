@@ -26,6 +26,8 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
+	fmt.Println("Recieved data :::: -> ", user)
+
 	//checking that user already exist or not
 	var dbUser models.User
 	db := db.DB
@@ -68,7 +70,11 @@ func SignUp(c *gin.Context) {
 		Password_hash: user.Password,
 		Age:           user.Age,
 	}
+
+	// if all are good then we store the user details in db
 	db.Create(&dbUser)
+
+	// sending response back
 	c.JSON(http.StatusOK, gin.H{
 		"success": "user created",
 	})
@@ -76,7 +82,8 @@ func SignUp(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-	fmt.Println("entered in login")
+
+	// Recieving the input from the user
 	var input models.Login
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -86,6 +93,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	// Finding if the user already exist ?
 	var User models.User
 	Validation := db.DB.Where("email=?", input.Email).Find(&User)
 	if Validation.Error != nil {
@@ -95,13 +103,15 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	// checking if user exist or not
 	if Validation.RowsAffected == 0 {
 		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": err.Error(),
+			"error": "invalid username and password",
 		})
 		return
 	}
 
+	// if exist then checking the user given password with store hashed password
 	err = bcrypt.CompareHashAndPassword([]byte(User.Password_hash), []byte(input.Password))
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
@@ -110,6 +120,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	//if all are good mean correct user login then we generate the access token
 	token, err := utils.GenerateJwt(User.Id, User.Email, User.Name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -117,6 +128,7 @@ func Login(c *gin.Context) {
 		})
 	}
 
+	// we also generate the refresh token here
 	refreshToken := utils.GenerateRefreshToken()
 	UserRefreshToken := &models.RefreshToken{
 		UserId:    User.Id,
@@ -125,12 +137,18 @@ func Login(c *gin.Context) {
 		CreatedAt: time.Now(),
 	}
 
+	// we store user refresh and access token in db
 	db.DB.Create(UserRefreshToken)
 
+	// sending response back with access and refresh token
 	c.JSON(http.StatusOK, gin.H{
 		"refresh-token": refreshToken,
 		"access-token":  token,
 	})
+}
+
+func VerifyNumber(c *gin.Context) {
+
 }
 
 func GetRefreshToken(c *gin.Context) {

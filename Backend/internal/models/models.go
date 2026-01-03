@@ -17,7 +17,7 @@ type SignUp struct {
 	Email    string `json:"email" binding:"required,email"`
 	Age      string `json:"age" gorm:"not null" binding:"required"`
 	Password string `json:"password"  binding:"required,min=6"`
-	Phone    string `json:"phone" gorm:"unique; not null" binding:"required"`
+	Phone    string `json:"phone" gorm:"unique; not null" binding:"required,min=10,max=10"`
 	Pin      string `json:"pin" gorm:"not null" binding:"len=6"`
 	State    string `json:"state" gorm:"not null"`
 	City     string `json:"city" gorm:"not null"`
