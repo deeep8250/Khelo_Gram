@@ -63,7 +63,7 @@ const SignupTeam: React.FC = () => {
                       <div>
                          <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Mobile Number</label>
                          <div className="flex gap-2">
-                             <input type="number" placeholder="123567890" maxlength="10" minlength="10" pattern="[0-9]{10}" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors" />
+                             <input type="tel" inputmode="numeric" placeholder="123567890" maxlength="10" minlength="10" pattern="[0-9]{10}" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors" />
                              <button type="button" className="bg-primary text-white font-medium px-4 py-2 rounded-lg hover:bg-sky-600 text-sm whitespace-nowrap shadow-sm">
                                 Send OTP
                             </button>
