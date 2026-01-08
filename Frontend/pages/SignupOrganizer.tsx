@@ -84,6 +84,7 @@ const SignupOrganizer: React.FC = () => {
                         inputmode="numeric"
                         maxlength="6"
                         placeholder="- - - - - -" className="block w-full md:w-48 text-center tracking-widest px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary text-lg transition-colors" />
+                        <span className="absolute right-3 top-3.5 text-xs font-bold text-green-600 cursor-pointer">Verify</span>
                   </div>
 
                   {/* Address */}
