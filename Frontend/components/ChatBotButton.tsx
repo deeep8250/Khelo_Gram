@@ -6,7 +6,7 @@ const ChatBotButton = () => {
       <button
         className="
           h-14 w-14
-          rounded-full
+          bg-transparent
           bg-primary
           flex items-center justify-center
           shadow-xl
@@ -24,7 +24,7 @@ const ChatBotButton = () => {
             transition-transform duration-300
             hover:rotate-8
           "
-          src="/cricket.png"
+          src="/robot2.png"
           alt="Chat Bot"
         />
       </button>

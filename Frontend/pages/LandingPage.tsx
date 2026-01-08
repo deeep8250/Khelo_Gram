@@ -23,26 +23,6 @@ const LandingPage: React.FC = () => {
             Khelo <span className="text-primary">Gram</span>
           </span>
         </div>
-        <div className="hidden md:flex items-center space-x-8">
-          <a
-            href="#"
-            className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors"
-          >
-            Features
-          </a>
-          <a
-            href="#"
-            className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors"
-          >
-            Pricing
-          </a>
-          <a
-            href="#"
-            className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors"
-          >
-            About
-          </a>
-        </div>
         <div className="flex items-center space-x-4">
           <button
             onClick={() => navigate("/login")}
@@ -102,7 +82,7 @@ const LandingPage: React.FC = () => {
               />
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              Trusted by 2,000+ organizers
+              Trusted by 200+ organizers
             </p>
           </div>
         </div>
