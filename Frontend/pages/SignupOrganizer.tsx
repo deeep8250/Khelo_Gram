@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trophy, Mail, Phone, Lock, Eye, EyeOff, MapPin } from 'lucide-react';
+import { Trophy, Mail, Phone, Lock, Eye, EyeOff, MapPin, Option } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const SignupOrganizer: React.FC = () => {
@@ -73,19 +73,15 @@ const SignupOrganizer: React.FC = () => {
                   </div>
 
                   {/* OTP Verification */}
-                  <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-lg border border-slate-200 dark:border-slate-700 border-dashed">
-                     <div className="flex justify-between items-center mb-4">
-                        <div className="flex items-center text-sm font-semibold text-slate-700 dark:text-slate-200">
-                           <Lock className="h-4 w-4 mr-2 text-primary" /> Verify OTP
+                 <div>
+                           <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Enter OTP</label>
+                           <div className="relative">
+                              <input type="text"
+                                 inputmode="numeric"
+                                 maxlength="6" placeholder="- - - - - -" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800 dark:text-white text-center tracking-widest transition-colors" />
+                              <span className="absolute right-3 top-3.5 text-xs font-bold text-green-600 cursor-pointer">Verify</span>
+                           </div>
                         </div>
-                        <span className="text-xs text-slate-400">Sent to mobile</span>
-                     </div>
-                     <input type="text"
-                        inputmode="numeric"
-                        maxlength="6"
-                        placeholder="- - - - - -" className="block w-full md:w-48 text-center tracking-widest px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary text-lg transition-colors" />
-                        <span className="absolute right-3 top-3.5 text-xs font-bold text-green-600 cursor-pointer">Verify</span>
-                  </div>
 
                   {/* Address */}
                   <div>
@@ -102,9 +98,10 @@ const SignupOrganizer: React.FC = () => {
                         <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">State / Province</label>
                         <select className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary text-slate-500 dark:text-slate-300 bg-white transition-colors">
                            <option>Enter State</option>
-                           <option>New York</option>
-                           <option>California</option>
-                           <option>Texas</option>
+                           <option>West Bengal</option>
+                           <option>Bihar</option>
+                           <option>Uttar Pradesh</option>
+                           <option>Delhi</option>
                         </select>
                      </div>
                   </div>
