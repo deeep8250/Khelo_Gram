@@ -41,7 +41,7 @@ const ChatBotButton = () => {
       {/* Status */}
       <span className="flex items-center gap-1 text-xs font-medium text-slate-800 dark:text-white">
         <span className="h-2 w-2 bg-green-500 rounded-full animate-pulse"></span>
-        Get help
+        Get Help
       </span>
 
     </div>
