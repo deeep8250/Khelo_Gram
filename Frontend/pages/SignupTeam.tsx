@@ -101,7 +101,7 @@ const SignupTeam: React.FC = () => {
                            </div>
                            <div>
                               <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Pin / Zip Code</label>
-                              <input type="text" placeholder="e.g. 90210" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors" />
+                              <input type="text" maxlength="6" placeholder="e.g. 902107" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors" />
                            </div>
                         </div>
                      </div>
@@ -116,7 +116,7 @@ const SignupTeam: React.FC = () => {
                         <div>
                            <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Password</label>
                            <div className="relative">
-                              <input type={showPassword ? "text" : "password"} placeholder="Create a password" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors" />
+                              <input type={showPassword ? "text" : "password"} required placeholder="Create a password" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors" />
                               <div className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400" onClick={() => setShowPassword(!showPassword)}>
                                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                               </div>
@@ -126,7 +126,7 @@ const SignupTeam: React.FC = () => {
                         <div>
                            <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Confirm Password</label>
                            <div className="relative">
-                              <input type="password" placeholder="Repeat password" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors" />
+                              <input type="password" required placeholder="Repeat password" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors" />
                               <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
                                  <EyeOff className="h-5 w-5" />
                               </div>
