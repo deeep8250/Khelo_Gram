@@ -20,6 +20,7 @@ const Footer: React.FC = () => {
               </span>
             </div>
 
+            
             <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 max-w-xs">
               The{" "}
               <span className="font-medium text-slate-800 dark:text-slate-300">
