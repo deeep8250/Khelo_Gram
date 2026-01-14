@@ -160,7 +160,7 @@ const SignupTeam: React.FC = () => {
                               value={password}
                               onChange={(e) => setPassword(e.target.value)}
                               className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 transition-colors"
-                              placeholder="••••••••" maxLength={8} minLength={8}
+                              placeholder="••••••••"
                            />
 
                            <div
@@ -202,7 +202,7 @@ const SignupTeam: React.FC = () => {
                         <input
                            type="password"
                            className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 transition-colors"
-                           placeholder="••••••••" maxLength={8} minLength={8}
+                           placeholder="••••••••" 
                         />
                      </div>
                   </div>
