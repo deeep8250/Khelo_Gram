@@ -129,7 +129,13 @@ const SignupTeam: React.FC = () => {
                            <div>
                               <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">State / Province</label>
                               <select className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-800 transition-colors">
-                                 <option className="">Select a state</option>
+                                  <div>
+                           <option>Select State</option>
+                           <option>West Bengal</option>
+                           <option>Bihar</option>
+                           <option>Uttar Pradesh</option>
+                           <option>Delhi</option>
+                           </div>
                               </select>
                            </div>
                            <div>
