@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useNavigate } from "react-router-dom";
 import {
   Trophy,
@@ -16,11 +16,12 @@ const LandingPage: React.FC = () => {
   return (
     <div className="bg-white dark:bg-slate-950 min-h-screen transition-colors duration-200">
       {/* Navigation for Landing */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+     <nav className="max-w-7xl bg-white dark:bg-slate-950 sticky top-0 z-50 mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
         <div className="flex items-center">
-          <Trophy className="h-8 w-8 text-primary" />
+          <Trophy className="h-8 w-8 text-sky-500" />
           <span className="ml-2 text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Khelo <span className="text-primary">Gram</span>
+            Khelo <span className="text-sky-500">Gram</span>
           </span>
         </div>
         <div className="flex items-center space-x-4">
@@ -32,9 +33,9 @@ const LandingPage: React.FC = () => {
           </button>
           <button
             onClick={() => navigate("/signup")}
-            className="bg-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-sky-600 transition-colors shadow-sm"
+            className="bg-sky-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-sky-600 transition-colors shadow-sm"
           >
-            Get Started
+             Register Now
           </button>
         </div>
       </nav>
@@ -55,7 +56,7 @@ const LandingPage: React.FC = () => {
               onClick={() => navigate("/signup")}
               className="bg-primary text-white px-8 py-3 rounded-lg text-base font-semibold hover:bg-sky-600 transition-colors shadow-lg shadow-primary/20"
             >
-              Get Started
+               Register Now
             </button>
 
             <button className="mr-auto bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-8 py-3 rounded-lg text-base font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
@@ -98,21 +99,7 @@ const LandingPage: React.FC = () => {
             Your browser does not support the video tag.
           </video>
 
-          {/* <div className="absolute bottom-8 left-8 right-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/20 dark:border-slate-700/50">
-                  <div className="flex items-center justify-between mb-2">
-                     <div className="flex items-center text-green-600 dark:text-green-400 font-semibold text-sm">
-                        <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
-                        Registration Complete
-                     </div>
-                     <span className="text-xs text-slate-500 dark:text-slate-400">Ready to Start</span>
-                  </div>
-                  <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
-                     <div className="bg-primary h-full w-3/4"></div>
-                  </div>
-                  <div className="mt-1 flex justify-between text-xs text-slate-500 dark:text-slate-400">
-                     <span>64 Teams</span>
-                  </div>
-               </div> */}
+
         </div>
       </div>
 
@@ -236,7 +223,7 @@ const LandingPage: React.FC = () => {
               onClick={() => navigate("/signup")}
               className="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-sky-600 transition-colors"
             >
-              Get Started Now
+              Register Now
             </button>
           </div>
         </div>
@@ -244,7 +231,8 @@ const LandingPage: React.FC = () => {
       <div className="bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <Footer />
-          <ChatBotButton />
+          <ChatBotButton onOpen={() => {}} />
+
         </div>
       </div>
     </div>

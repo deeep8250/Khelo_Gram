@@ -11,8 +11,10 @@ type ChatbotUIProps = {
 
 const ChatbotUI = ({ onClose }: ChatbotUIProps) => {
   const [messages, setMessages] = useState<Message[]>([
-    { from: "bot", text: "Hello there! What can I do to lend a hand?" },
-    { from: "bot", text: "Hello! What brings you here? How can I assist?" },
+    {
+      from: "bot",
+      text: "Hi! My name is PlayCo. I'm your virtual assistant for Khelo Gram. How can I help you?",
+    },
   ]);
 
   const [input, setInput] = useState("");
@@ -20,21 +22,25 @@ const ChatbotUI = ({ onClose }: ChatbotUIProps) => {
   const sendMessage = () => {
     if (!input.trim()) return;
 
+    // User message
     setMessages((prev) => [...prev, { from: "user", text: input }]);
     setInput("");
 
-    // Optional: fake bot reply
+    // Fake bot reply
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
-        { from: "bot", text: "Thanks for your message! I’m here to help 😊" },
+        {
+          from: "bot",
+          text: "Thanks for your message! I’m here to help 😊",
+        },
       ]);
     }, 800);
   };
 
   return (
     <div className="fixed bottom-24 right-6 z-50 w-[360px] h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-
+      
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-sky-600 text-white">
         <div className="flex items-center gap-2">
@@ -47,13 +53,8 @@ const ChatbotUI = ({ onClose }: ChatbotUIProps) => {
         </button>
       </div>
 
-      {/* Info */}
-      <div className=" py-2 ">
-       
-      </div>
-
       {/* Messages */}
-      <div className="flex-1 px-3 py-2 overflow-y-auto space-y-3">
+      <div className="flex-1 px-3 py-3 overflow-y-auto space-y-3">
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -61,7 +62,7 @@ const ChatbotUI = ({ onClose }: ChatbotUIProps) => {
               msg.from === "bot" ? "justify-start" : "justify-end"
             }`}
           >
-            {/* Robot avatar for bot */}
+            {/* Bot Avatar */}
             {msg.from === "bot" && (
               <img
                 src="/robot2.png"
@@ -70,8 +71,16 @@ const ChatbotUI = ({ onClose }: ChatbotUIProps) => {
               />
             )}
 
-            {/* Message bubble */}
-          <div className="max-w-[80%] px-3 py-2 rounded-lg text-sm bg-sky-600 text-white"> Hi! My name is PlayCo, I'm your virtual assistant for Khelo gram. How can I help you? </div>
+            {/* Message Bubble */}
+            <div
+              className={`max-w-[80%] px-3 py-2 rounded-lg text-sm ${
+                msg.from === "bot"
+                  ? "bg-sky-600 text-white"
+                  : "bg-gray-200 text-black"
+              }`}
+            >
+              {msg.text}
+            </div>
           </div>
         ))}
       </div>

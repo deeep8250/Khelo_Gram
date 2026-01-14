@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trophy, Mail, Phone, Lock, Eye, EyeOff, MapPin, Option } from 'lucide-react';
+import { Trophy, Mail, Phone, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const SignupOrganizer: React.FC = () => {
@@ -8,6 +8,30 @@ const SignupOrganizer: React.FC = () => {
    const { login } = useAuth();
    const [showPassword, setShowPassword] = useState(false);
    const [agreed, setAgreed] = useState(false);
+   const [password, setPassword] = useState("");
+
+   const getPasswordStrength = (pwd: string) => {
+      if (!pwd) return null;
+
+      const hasLetter = /[a-zA-Z]/.test(pwd);
+      const hasNumber = /\d/.test(pwd);
+      const hasSpecial = /[^a-zA-Z0-9]/.test(pwd);
+
+      if (pwd.length < 4) {
+         return { label: "Weak", color: "bg-red-500", width: "25%", text: "text-red-500" };
+      }
+
+      if (hasLetter && hasNumber && pwd.length >= 6 && !hasSpecial) {
+         return { label: "Medium", color: "bg-yellow-500", width: "60%", text: "text-yellow-500" };
+      }
+
+      if (hasLetter && hasNumber && hasSpecial && pwd.length >= 8) {
+         return { label: "Strong", color: "bg-green-500", width: "100%", text: "text-green-500" };
+      }
+
+      return { label: "Weak", color: "bg-red-500", width: "25%", text: "text-red-500" };
+   };
+
 
    const handleSignup = () => {
       login('organizer');
@@ -63,7 +87,7 @@ const SignupOrganizer: React.FC = () => {
                               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                                  <Phone className="h-5 w-5" />
                               </div>
-                              <input type="tel" inputmode="numeric" placeholder="123567890" maxlength="10" minlength="10" pattern="[0-9]{10}" className="block w-full pl-10 pr-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 transition-colors" />
+                              <input type="tel" inputMode="numeric" placeholder="123567890" maxLength={10} minLength={10} pattern="[0-9]{10}" className="block w-full pl-10 pr-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 transition-colors" />
                            </div>
                            <button type="button" className="bg-blue-50 dark:bg-blue-900/30 text-primary font-medium px-4 py-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 text-sm whitespace-nowrap transition-colors">
                               Get OTP
@@ -73,15 +97,15 @@ const SignupOrganizer: React.FC = () => {
                   </div>
 
                   {/* OTP Verification */}
-                 <div>
-                           <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Enter OTP</label>
-                           <div className="relative">
-                              <input type="text"
-                                 inputmode="numeric"
-                                 maxlength="6" placeholder="- - - - - -" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800 dark:text-white text-center tracking-widest transition-colors" />
-                              <span className="absolute right-3 top-3.5 text-xs font-bold text-green-600 cursor-pointer">Verify</span>
-                           </div>
-                        </div>
+                  <div>
+                     <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Enter OTP</label>
+                     <div className="relative">
+                        <input type="text"
+                           inputMode="numeric"
+                           maxLength={6} placeholder="- - - - - -" className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 bg-white dark:bg-slate-800 dark:text-white text-center tracking-widest transition-colors" />
+                        <span className="absolute right-3 top-3.5 text-xs font-bold text-green-600 cursor-pointer">Verify</span>
+                     </div>
+                  </div>
 
                   {/* Address */}
                   <div>
@@ -97,43 +121,77 @@ const SignupOrganizer: React.FC = () => {
                      <div>
                         <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">State / Province</label>
                         <select className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary text-slate-500 dark:text-slate-300 bg-white transition-colors">
-                           <option>Enter State</option>
+                           <div>
+                           <option>Select State</option>
                            <option>West Bengal</option>
                            <option>Bihar</option>
                            <option>Uttar Pradesh</option>
                            <option>Delhi</option>
+                           </div>
                         </select>
                      </div>
                   </div>
 
-                  {/* Password */}
+                  {/* Section 4: Security */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div>
-                        <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Password</label>
+                        <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">
+                           Password
+                        </label>
+
                         <div className="relative">
                            <input
                               type={showPassword ? "text" : "password"}
+                              value={password}
+                              onChange={(e) => setPassword(e.target.value)}
                               className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 transition-colors"
-                              placeholder="••••••••"
+                              placeholder="••••••••" 
                            />
-                           <div className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400" onClick={() => setShowPassword(!showPassword)}>
-                              {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+
+                           <div
+                              className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400"
+                              onClick={() => setShowPassword(!showPassword)}
+                           >
+                              {showPassword ? (
+                                 <EyeOff className="h-5 w-5" />
+                              ) : (
+                                 <Eye className="h-5 w-5" />
+                              )}
                            </div>
                         </div>
-                        <div className="w-full bg-slate-200 dark:bg-slate-700 h-1 mt-2 rounded-full overflow-hidden">
-                           <div className="bg-red-500 h-full w-1/4"></div>
-                        </div>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Weak password</p>
+
+                        {password && (() => {
+                           const strength = getPasswordStrength(password);
+                           if (!strength) return null;
+
+                           return (
+                              <>
+                                 <div className="w-full bg-slate-200 dark:bg-slate-700 h-1 mt-2 rounded-full overflow-hidden">
+                                    <div
+                                       className={`h-full transition-all duration-300 ${strength.color}`}
+                                       style={{ width: strength.width }}
+                                    />
+                                 </div>
+                                 <p className={`text-xs mt-1 font-medium ${strength.text}`}>
+                                    Password strength: {strength.label}
+                                 </p>
+                              </>
+                           );
+                        })()}
                      </div>
+
                      <div>
-                        <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">Confirm Password</label>
+                        <label className="block text-sm font-medium text-slate-900 dark:text-slate-300 mb-2">
+                           Confirm Password
+                        </label>
                         <input
                            type="password"
                            className="block w-full px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-lg focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500 transition-colors"
-                           placeholder="••••••••"
+                           placeholder="••••••••" 
                         />
                      </div>
                   </div>
+
 
                   <div className="flex items-center pt-4">
                      <input
