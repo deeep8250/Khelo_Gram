@@ -16,7 +16,6 @@ const ChatbotUI = ({ onClose }: ChatbotUIProps) => {
       text: "Hi! My name is PlayCo. I'm your virtual assistant for Khelo Gram. How can I help you?",
     },
   ]);
-
   const [input, setInput] = useState("");
 
   const sendMessage = () => {
