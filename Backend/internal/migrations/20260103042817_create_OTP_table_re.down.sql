@@ -1,1 +1,1 @@
-drop table if exist otp_verification ;
+drop table if exists otp_verification ;

@@ -36,6 +36,12 @@ type User struct {
 	RefreshToken  []RefreshToken `json:"-" gorm:"foreignKey:UserId"`
 }
 
+
+
+
+
+
+
 type Location struct {
 	Id        uint      `json:"id" gorm:"primaryKey"`
 	OwnerID   uint      `json:"owner_id" gorm:"index"`

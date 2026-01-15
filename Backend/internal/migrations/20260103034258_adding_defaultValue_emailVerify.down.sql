@@ -1,2 +1,2 @@
-alter table users 
-alter column email_isVerify drop default;
+ALTER TABLE users
+DROP COLUMN email_isVerify;
